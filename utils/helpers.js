@@ -4,7 +4,7 @@ import { View } from 'react-native';
 import {
   FontAwesome, MaterialIcons, MaterialCommunityIcons
 } from '@expo/vector-icons';
-import { white } from './colors';
+import { gray } from './colors';
 
 export function getMetricMetaInfo (metric) {
   const info = {
@@ -16,10 +16,10 @@ export function getMetricMetaInfo (metric) {
       type: 'steppers',
       getIcon() {
         return (
-          <View style={[styles.iconContainer, {backgroundColor: red}]}>
+          <View>
             <MaterialIcons
               name='directions-run'
-              color={white}
+              color={gray}
               size={35}
             />
           </View>
@@ -34,10 +34,10 @@ export function getMetricMetaInfo (metric) {
       type: 'steppers',
       getIcon() {
         return (
-          <View style={[styles.iconContainer, {backgroundColor: orange}]}>
+          <View>
             <MaterialCommunityIcons
               name='bike'
-              color={white}
+              color={gray}
               size={32}
             />
           </View>
@@ -52,10 +52,10 @@ export function getMetricMetaInfo (metric) {
       type: 'steppers',
       getIcon() {
         return (
-          <View style={[styles.iconContainer, {backgroundColor: blue}]}>
+          <View>
             <MaterialCommunityIcons
               name='swim'
-              color={white}
+              color={gray}
               size={35}
             />
           </View>
@@ -70,10 +70,10 @@ export function getMetricMetaInfo (metric) {
       type: 'slider',
       getIcon() {
         return (
-          <View style={[styles.iconContainer, {backgroundColor: lightPurp}]}>
+          <View>
             <FontAwesome
               name='bed'
-              color={white}
+              color={gray}
               size={30}
             />
           </View>
@@ -88,10 +88,10 @@ export function getMetricMetaInfo (metric) {
       type: 'slider',
       getIcon() {
         return (
-          <View style={[styles.iconContainer, {backgroundColor: pink}]}>
+          <View>
             <MaterialCommunityIcons
               name='food'
-              color={white}
+              color={gray}
               size={35}
             />
           </View>
