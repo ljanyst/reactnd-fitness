@@ -1,6 +1,8 @@
 
 import React, { Component } from 'react';
-import { View, Text, TouchableOpacity } from 'react-native';
+import {
+  View, Text, TouchableOpacity, Platform, StyleSheet
+} from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { connect } from 'react-redux';
 
@@ -9,6 +11,7 @@ import {
 } from '../utils/helpers';
 import { submitEntry, removeEntry } from '../utils/api';
 import { addEntry } from '../actions';
+import { white, purple } from '../utils/colors';
 
 import Stepper from './Stepper';
 import LabeledSlider from './LabeledSlider';
@@ -16,13 +19,88 @@ import DateHeader from './DateHeader';
 import TextButton from './TextButton';
 
 //------------------------------------------------------------------------------
+// Styles
+//------------------------------------------------------------------------------
+const styles = StyleSheet.create({
+  //----------------------------------------------------------------------------
+  // Container
+  //----------------------------------------------------------------------------
+  container: {
+    flex: 1,
+    padding: 20,
+    backgroundColor: white    
+  },
+
+  //----------------------------------------------------------------------------
+  // Row
+  //----------------------------------------------------------------------------
+  row: {
+    flexDirection: 'row',
+    flex: 1,
+    alignItems: 'center'
+  },
+
+  //----------------------------------------------------------------------------
+  // IOS submit button
+  //----------------------------------------------------------------------------
+  iosSubmitBtn: {
+    backgroundColor: purple,
+    padding: 10,
+    borderRadius: 7,
+    height: 45,
+    marginLeft: 40,
+    marginRight: 40
+  },
+
+  //----------------------------------------------------------------------------
+  // Android submit button
+  //----------------------------------------------------------------------------
+  androidSubmitBtn: {
+    backgroundColor: purple,
+    padding: 10,
+    paddingLeft: 30,
+    paddingRight: 30,
+    height: 45,
+    borderRadius: 2,
+    alignSelf: 'flex-end',
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+
+  //----------------------------------------------------------------------------
+  // Submit button text
+  //----------------------------------------------------------------------------
+  submitBtnText: {
+    color: white,
+    fontSize: 22,
+    textAlign: 'center'
+  },
+
+  //----------------------------------------------------------------------------
+  // Center
+  //----------------------------------------------------------------------------
+  center: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginRight: 30,
+    marginLeft: 30
+  }
+});
+
+//------------------------------------------------------------------------------
 // Submit button
 //------------------------------------------------------------------------------
 function SubmitBtn({onPress}) {
   return (
     <TouchableOpacity
+      style={
+        Platform.OS === 'ios'
+          ? styles.iosSubmitBtn
+          : styles.androidSubmitBtn
+      }
       onPress={onPress}>
-      <Text>
+      <Text style={styles.submitBtnText}>
         SUBMIT
       </Text>
     </TouchableOpacity>
@@ -116,27 +194,31 @@ class AddEntry extends Component {
 
     if(this.props.alreadyLogged)
       return (
-        <View>
+        <View style={styles.center}>
           <Ionicons
-            name='ios-happy-outline'
+            name={
+              Platform.OS === 'ios'
+                ? 'ios-happy-outline'
+                : 'md-happy'
+            }
             size={100}
           />
           <Text>
             You already logged your information for today.
           </Text>
-          <TextButton onPress={this.reset}>
+          <TextButton onPress={this.reset} style={{padding: 10}}>
             Reset
           </TextButton>
         </View>
       );
     return (
-      <View>
+      <View style={styles.container}>
         <DateHeader date={(new Date()).toLocaleDateString()}/>
         {Object.keys(metaInfo).map((metric) => {
           const { getIcon, type, ...rest } = metaInfo[metric];
           const value = this.state[metric];
           return (
-            <View key={metric}>
+            <View key={metric} style={styles.row}>
               {getIcon()}
               {type === 'slider'
                 ? <LabeledSlider
