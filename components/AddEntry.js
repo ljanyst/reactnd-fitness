@@ -4,6 +4,7 @@ import { View, Text, TouchableOpacity } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 
 import { getMetricMetaInfo, timeToString } from '../utils/helpers';
+import { submitEntry, removeEntry } from '../utils/api';
 
 import Stepper from './Stepper';
 import LabeledSlider from './LabeledSlider';
@@ -81,6 +82,8 @@ export default class AddEntry extends Component {
       sleep: 0,
       eat: 0
     });
+
+    submitEntry({ key, entry});
   }
 
   //----------------------------------------------------------------------------
@@ -88,6 +91,8 @@ export default class AddEntry extends Component {
   //----------------------------------------------------------------------------
   reset = () => {
     const key = timeToString();
+
+    removeEntry(key);
   }
 
   //----------------------------------------------------------------------------
