@@ -166,7 +166,7 @@ class AddEntry extends Component {
 function mapStateToProps(state) {
   const key = timeToString();
   return {
-    alreadyLogged: state[key] && typeof state[key] === 'undefined'
+    alreadyLogged: state[key] && typeof state[key] !== 'undefined'
   };
 }
 
