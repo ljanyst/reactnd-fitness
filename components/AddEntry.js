@@ -6,6 +6,7 @@ import { getMetricMetaInfo } from '../utils/helpers';
 
 import Stepper from './Stepper';
 import Slider from './Slider';
+import DateHeader from './DateHeader';
 
 //------------------------------------------------------------------------------
 // Add Entry
@@ -58,6 +59,7 @@ export default class AddEntry extends Component {
     const metaInfo = getMetricMetaInfo();
     return (
       <View>
+        <DateHeader date={(new Date()).toLocaleDateString()}/>
         {Object.keys(metaInfo).map((metric) => {
           const { getIcon, type, ...rest } = metaInfo[metric];
           const value = this.state[metric];
