@@ -1,12 +1,26 @@
 
 import React, { Component } from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, TouchableOpacity } from 'react-native';
 
-import { getMetricMetaInfo } from '../utils/helpers';
+import { getMetricMetaInfo, timeToString } from '../utils/helpers';
 
 import Stepper from './Stepper';
 import Slider from './Slider';
 import DateHeader from './DateHeader';
+
+//------------------------------------------------------------------------------
+// Submit button
+//------------------------------------------------------------------------------
+function SubmitBtn({onPress}) {
+  return (
+    <TouchableOpacity
+      onPress={onPress}>
+      <Text>
+        SUBMIT
+      </Text>
+    </TouchableOpacity>
+  );
+}
 
 //------------------------------------------------------------------------------
 // Add Entry
@@ -53,6 +67,21 @@ export default class AddEntry extends Component {
   }
 
   //----------------------------------------------------------------------------
+  // Submit
+  //----------------------------------------------------------------------------
+  submit = () => {
+    const key = timeToString();
+    const entry = this.state;
+    this.setState({
+      run: 0,
+      bike: 0,
+      swim: 0,
+      sleep: 0,
+      eat: 0
+    });
+  }
+
+  //----------------------------------------------------------------------------
   // Render the component
   //----------------------------------------------------------------------------
   render() {
@@ -82,6 +111,7 @@ export default class AddEntry extends Component {
             </View>
           );
         })}
+        <SubmitBtn onPress={this.submit}/>
       </View>
     );
   }
