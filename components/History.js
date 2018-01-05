@@ -5,6 +5,7 @@ import {
 } from 'react-native';
 import { connect } from 'react-redux';
 import UdaciFitnessCalendar from 'udacifitness-calendar';
+import { AppLoading } from 'expo';
 
 import { receiveEntries, addEntry } from '../actions';
 import { timeToString, getDailyReminderValue } from '../utils/helpers';
@@ -53,6 +54,13 @@ const styles = StyleSheet.create({
 //------------------------------------------------------------------------------
 class History extends Component {
   //----------------------------------------------------------------------------
+  // The state
+  //----------------------------------------------------------------------------
+  state = {
+    ready: false
+  };
+
+  //----------------------------------------------------------------------------
   // Mount the component
   //----------------------------------------------------------------------------
   componentDidMount() {
@@ -63,7 +71,8 @@ class History extends Component {
           this.props.addEntry({
             [timeToString()]: getDailyReminderValue()
           });
-      });
+      })
+      .then(() => this.setState({ready: true}));
   }
 
   //----------------------------------------------------------------------------
@@ -104,6 +113,9 @@ class History extends Component {
   // Render
   //----------------------------------------------------------------------------
   render() {
+    if(this.state.ready === false)
+      return <AppLoading />;
+
     return (
       <UdaciFitnessCalendar
         items={this.props.entries}
