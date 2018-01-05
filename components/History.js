@@ -12,6 +12,7 @@ import { fetchCalendarResults } from '../utils/api';
 import { white } from '../utils/colors';
 
 import DateHeader from './DateHeader';
+import MetricCard from './MetricCard';
 
 //------------------------------------------------------------------------------
 // Styles
@@ -78,7 +79,9 @@ class History extends Component {
               {today}
             </Text>
           </View>
-          : <Text>{JSON.stringify(metrics)}</Text>
+        : <TouchableOpacity>
+          <MetricCard metrics={metrics} date={formattedDate} />
+          </TouchableOpacity>
       }
     </View>
   );
