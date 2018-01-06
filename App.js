@@ -2,7 +2,7 @@ import React from 'react';
 import { View, Platform, StatusBar } from 'react-native';
 import { createStore } from 'redux';
 import { Provider } from 'react-redux';
-import { TabNavigator } from 'react-navigation';
+import { TabNavigator, StackNavigator } from 'react-navigation';
 import { FontAwesome, Ionicons } from '@expo/vector-icons';
 import { Constants } from 'expo';
 
@@ -11,6 +11,7 @@ import { purple, white } from './utils/colors';
 
 import AddEntry from './components/AddEntry';
 import History from './components/History';
+import EntryDetail from './components/EntryDetail';
 
 //------------------------------------------------------------------------------
 // Status Bar
@@ -66,6 +67,24 @@ const Tabs = TabNavigator({
 });
 
 //------------------------------------------------------------------------------
+// Main navigator
+//------------------------------------------------------------------------------
+const MainNavigator = StackNavigator({
+  Home: {
+    screen: Tabs
+  },
+  EntryDetail: {
+    screen: EntryDetail,
+    navigationOptions: {
+      headerTintColor: white,
+      headerStyle: {
+        backgroundColor: purple
+      }
+    }
+  }
+});
+
+//------------------------------------------------------------------------------
 // Component
 //------------------------------------------------------------------------------
 export default class App extends React.Component {
@@ -74,7 +93,7 @@ export default class App extends React.Component {
       <Provider store={createStore(entriesReducer)}>
         <View style={{flex: 1}}>
           <FitnessStatusBar backgroundColor={purple} barStyle='light-content'/>
-          <Tabs />
+          <MainNavigator />
         </View>
       </Provider>
     );
