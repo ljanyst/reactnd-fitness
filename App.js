@@ -1,15 +1,27 @@
 import React from 'react';
-import { View, Platform } from 'react-native';
+import { View, Platform, StatusBar } from 'react-native';
 import { createStore } from 'redux';
 import { Provider } from 'react-redux';
 import { TabNavigator } from 'react-navigation';
 import { FontAwesome, Ionicons } from '@expo/vector-icons';
+import { Constants } from 'expo';
 
 import entriesReducer from './reducers';
 import { purple, white } from './utils/colors';
 
 import AddEntry from './components/AddEntry';
 import History from './components/History';
+
+//------------------------------------------------------------------------------
+// Status Bar
+//------------------------------------------------------------------------------
+function FitnessStatusBar( {backgroundColor, ...props} ) {
+  return (
+    <View style={{backgroundColor, height: Constants.statusBarHeight}}>
+      <StatusBar translucent backgroundColor={backgroundColor} {...props} />
+    </View>
+  );
+}
 
 //------------------------------------------------------------------------------
 // Tabs
@@ -61,6 +73,7 @@ export default class App extends React.Component {
     return (
       <Provider store={createStore(entriesReducer)}>
         <View style={{flex: 1}}>
+          <FitnessStatusBar backgroundColor={purple} barStyle='light-content'/>
           <Tabs />
         </View>
       </Provider>
