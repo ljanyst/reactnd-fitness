@@ -5,6 +5,7 @@ import {
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { connect } from 'react-redux';
+import { NavigationActions } from 'react-navigation';
 
 import {
   getMetricMetaInfo, timeToString, getDailyReminderValue
@@ -171,6 +172,7 @@ class AddEntry extends Component {
     });
 
     submitEntry({ key, entry});
+    this.toHome();
   }
 
   //----------------------------------------------------------------------------
@@ -184,6 +186,15 @@ class AddEntry extends Component {
     });
 
     removeEntry(key);
+  }
+
+  //----------------------------------------------------------------------------
+  // To home
+  //----------------------------------------------------------------------------
+  toHome = () => {
+    this.props.navigation.dispatch(NavigationActions.back({
+      key: 'AddEntry'
+    }));
   }
 
   //----------------------------------------------------------------------------
