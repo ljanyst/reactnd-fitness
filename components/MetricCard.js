@@ -13,7 +13,7 @@ import DateHeader from './DateHeader';
 const styles = StyleSheet.create({
   metric: {
     flexDirection: 'row',
-    marginTop: 12
+    alignItems: 'center'
   }
 });
 
