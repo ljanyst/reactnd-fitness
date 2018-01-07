@@ -8,6 +8,7 @@ import { Constants } from 'expo';
 
 import entriesReducer from './reducers';
 import { purple, white } from './utils/colors';
+import { setLocalNotification } from './utils/helpers';
 
 import AddEntry from './components/AddEntry';
 import History from './components/History';
@@ -98,6 +99,15 @@ const MainNavigator = StackNavigator({
 // Component
 //------------------------------------------------------------------------------
 export default class App extends React.Component {
+  //----------------------------------------------------------------------------
+  // Component mounted
+  //----------------------------------------------------------------------------
+  componentDidMount() {
+    setLocalNotification();
+  }
+  //----------------------------------------------------------------------------
+  // Render
+  //----------------------------------------------------------------------------
   render() {
     return (
       <Provider store={createStore(entriesReducer)}>

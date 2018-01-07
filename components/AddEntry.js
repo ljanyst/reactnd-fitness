@@ -8,7 +8,8 @@ import { connect } from 'react-redux';
 import { NavigationActions } from 'react-navigation';
 
 import {
-  getMetricMetaInfo, timeToString, getDailyReminderValue
+  getMetricMetaInfo, timeToString, getDailyReminderValue,
+  clearLocalNotification, setLocalNotification
 } from '../utils/helpers';
 import { submitEntry, removeEntry } from '../utils/api';
 import { addEntry } from '../actions';
@@ -173,6 +174,9 @@ class AddEntry extends Component {
 
     submitEntry({ key, entry});
     this.toHome();
+
+    clearLocalNotification().
+      then(setLocalNotification);
   }
 
   //----------------------------------------------------------------------------
