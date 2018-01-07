@@ -176,7 +176,7 @@ class Live extends Component {
               Altitude
             </Text>
             <Text style={[styles.header, {color: white}]}>
-              {Math.round(coords.altitude)} Meters
+              {Math.round(coords.altitude)} m
             </Text>
           </View>
           <View style={styles.metric}>
@@ -184,7 +184,7 @@ class Live extends Component {
               Speed
             </Text>
             <Text style={[styles.header, {color: white}]}>
-              {(coords.speed*3.6).toFixed(1)} MPH
+              {(coords.speed*3.6).toFixed(1)} km/h
             </Text>
           </View>
 
